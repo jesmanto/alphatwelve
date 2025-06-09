@@ -15,7 +15,18 @@ class DeliveryAddress extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.max,
           children: [
-            Text("Full Logo"),
+            Container(
+              padding: EdgeInsets.all(8),
+              decoration: BoxDecoration(color: Color(0xff60b5ff)),
+              child: Text(
+                "Full Logo",
+                style: TextStyle(
+                  fontSize: 10,
+                  fontWeight: FontWeight.w600,
+                  color: Color(0xff2563eb),
+                ),
+              ),
+            ),
             Column(
               children: [
                 Text(

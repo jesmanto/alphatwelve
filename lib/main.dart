@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         fontFamily: GoogleFonts.ibmPlexSans().fontFamily,
-        scaffoldBackgroundColor: Colors.grey.shade200,
+        scaffoldBackgroundColor: Colors.grey.shade50,
         // This is the theme of your application.
         //
         // TRY THIS: Try running your application with "flutter run". You'll see

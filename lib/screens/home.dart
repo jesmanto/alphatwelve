@@ -53,7 +53,7 @@ class _HomeState extends State<Home> {
       name: 'Apple iPhone 16',
       description: '128GB | Teal',
       imageUrl:
-      'https://res.cloudinary.com/jesmanto/image/upload/v1749131960/product1_m9lhwk.png',
+          'https://res.cloudinary.com/jesmanto/image/upload/v1749131960/product1_m9lhwk.png',
       price: '\$700.00',
     ),
     Product(
@@ -61,7 +61,7 @@ class _HomeState extends State<Home> {
       name: 'Apple iPhone 16',
       description: '128GB | Teal',
       imageUrl:
-      'https://res.cloudinary.com/jesmanto/image/upload/v1749131960/product1_m9lhwk.png',
+          'https://res.cloudinary.com/jesmanto/image/upload/v1749131960/product1_m9lhwk.png',
       price: '\$700.00',
     ),
   ];
@@ -69,13 +69,17 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(),
+      appBar: CustomAppBar(includeSearch: true,),
       body: SafeArea(
         child: Column(
           children: [
-            SizedBox(height: 2),
-            NavigationPane(),
-            Expanded(child: ProductsList(products: products)),
+            NavigationPane(title: "Technology"),
+            Expanded(
+              child: ProductsList(
+                products: products,
+                productsCategory: 'Smartphones, Laptops & Accessories',
+              ),
+            ),
           ],
         ),
       ),

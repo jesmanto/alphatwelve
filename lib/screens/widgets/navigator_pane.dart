@@ -2,20 +2,31 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class NavigationPane extends StatelessWidget {
-  const NavigationPane({super.key});
+  const NavigationPane({super.key, required this.title, this.callback});
+
+  final String title;
+  final Function()? callback;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       color: Colors.white,
-      child: const Row(
+      child: Row(
         children: [
-          Padding(
-            padding: EdgeInsets.only(right: 16.0),
-            child: Icon(CupertinoIcons.back,size: 11,),
+          IconButton(
+            onPressed:
+                callback != null
+                    ? () {
+                      callback!();
+                    }
+                    : () {},
+            icon: Icon(CupertinoIcons.back),
+            iconSize: 11,
           ),
-          Text("Technology", style: TextStyle(fontWeight: FontWeight.w700,fontSize: 18),)
+          Text(
+            title,
+            style: TextStyle(fontWeight: FontWeight.w700, fontSize: 18),
+          ),
         ],
       ),
     );
