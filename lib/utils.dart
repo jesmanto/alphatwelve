@@ -55,7 +55,7 @@ final products = [
 
 void showCustomToast(BuildContext context) {
   final overlay = Overlay.of(context);
-  late OverlayEntry entry; // Declare it first
+  late OverlayEntry entry;
 
   entry = OverlayEntry(
     builder:

@@ -1,5 +1,4 @@
 import 'package:alphatwelve/cart/screens/widgets/cart_items.dart';
-import 'package:alphatwelve/screens/widgets/custom_app_bar.dart';
 import 'package:alphatwelve/screens/widgets/navigator_pane.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +8,9 @@ import '../controllers/cart_provider.dart';
 import '../../utils.dart';
 
 class Cart extends StatefulWidget {
-  const Cart({super.key});
+  const Cart({super.key, required this.scaffoldKey, required this.onBackPressed});
+  final GlobalKey<ScaffoldState> scaffoldKey;
+  final VoidCallback onBackPressed;
 
   @override
   State<Cart> createState() => _CartState();
@@ -19,9 +20,15 @@ class _CartState extends State<Cart> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: widget.scaffoldKey,
       body: Column(
         children: [
-          NavigationPane(title: 'Your Cart', callback: () {}),
+          NavigationPane(
+            title: 'Your Cart',
+            callback: () {
+              widget.onBackPressed;
+            },
+          ),
           Expanded(child: CartItems(products: products)),
         ],
       ),
