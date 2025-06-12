@@ -37,6 +37,7 @@ dependencies:
   flutter_svg: ^2.1.0
   google_fonts: ^6.2.1
   cached_network_image: ^3.4.1
+  provider: ^6.1.5
 
 dev_dependencies:
   flutter_test:
@@ -64,7 +65,12 @@ flutter:
   assets:
     - assets/icons/hugeicons_notification.svg
     - assets/icons/hugeicons_favourite.svg
+    - assets/icons/favourite_icon.svg
     - assets/icons/search_icon.svg
+    - assets/icons/home_icon.svg
+    - assets/icons/cart_icon.svg
+    - assets/icons/profile_icon.svg
+    - assets/icons/delete_icon.svg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

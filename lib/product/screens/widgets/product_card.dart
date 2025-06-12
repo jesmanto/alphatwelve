@@ -1,8 +1,8 @@
-import 'package:alphatwelve/models/Product.dart';
-import 'package:alphatwelve/screens/single_product_page.dart';
+import 'package:alphatwelve/product/screens/single_product_page.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import '../../models/Product.dart';
 
 class ProductCard extends StatefulWidget {
   const ProductCard({super.key, required this.product});
@@ -63,7 +63,7 @@ class _ProductCardState extends State<ProductCard> {
           ),
           SizedBox(height: 2),
           Text(
-            widget.product.price,
+            '\$${widget.product.price}',
             style: TextStyle(fontWeight: FontWeight.w700, fontSize: 16),
           ),
         ],

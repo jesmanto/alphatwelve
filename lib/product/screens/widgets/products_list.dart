@@ -1,4 +1,4 @@
-import 'package:alphatwelve/screens/widgets/product_card.dart';
+import 'package:alphatwelve/product/screens/widgets/product_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -41,34 +41,13 @@ class _ProductsListState extends State<ProductsList> {
             ),
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
-              mainAxisSpacing: 12,
-              crossAxisSpacing: 16,
+              mainAxisSpacing: 2,
+              crossAxisSpacing: 2,
               childAspectRatio: 0.7,
             ),
           ),
         ),
       ],
     );
-    // return Padding(
-    //   padding: const EdgeInsets.all(8.0),
-    //   child: Column(
-    //     children: [
-    //       const Text("Product Category"),
-    //       GridView.builder(
-    //         itemCount: widget.products.length,
-    //         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-    //           crossAxisCount: 2,
-    //           mainAxisSpacing: 16,
-    //           crossAxisSpacing: 12,
-    //           childAspectRatio: 0.70,
-    //         ),
-    //         itemBuilder: (context, index) {
-    //           final product = widget.products[index];
-    //           return ProductCard(product: product);
-    //         },
-    //       ),
-    //     ],
-    //   ),
-    // );
   }
 }

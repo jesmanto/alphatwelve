@@ -1,9 +1,12 @@
-import 'package:alphatwelve/models/Product.dart';
+import 'package:alphatwelve/cart/controllers/cart_provider.dart';
+import 'package:alphatwelve/product/screens/widgets/product_image.dart';
 import 'package:alphatwelve/screens/widgets/custom_app_bar.dart';
 import 'package:alphatwelve/screens/widgets/navigator_pane.dart';
-import 'package:alphatwelve/screens/widgets/product_image.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:alphatwelve/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../models/Product.dart';
 
 class SingleProductPage extends StatefulWidget {
   const SingleProductPage(this.product, {super.key});
@@ -49,7 +52,7 @@ class _SingleProductPageState extends State<SingleProductPage> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: Text(
-                  widget.product.price,
+                  '\$${widget.product.price}',
                   style: TextStyle(
                     fontSize: 32.75,
                     fontWeight: FontWeight.w800,
@@ -84,25 +87,31 @@ class _SingleProductPageState extends State<SingleProductPage> {
       bottomNavigationBar: Container(
         padding: const EdgeInsets.all(16),
         color: Colors.white,
-        child: SizedBox(
-          width: double.infinity,
-          child: ElevatedButton(
-            onPressed: () {},
-            style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xff60b5ff),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8),
+        child: Consumer<CartProvider>(
+          builder:
+              (BuildContext context, cartProvider, Widget? child) => SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () {
+                    cartProvider.addToCart(widget.product);
+                    showCustomToast(context);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xff60b5ff),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                  child: Text(
+                    'Add to cart',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ),
               ),
-            ),
-            child: Text(
-              'Add to cart',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 14,
-                fontWeight: FontWeight.w700,
-              ),
-            ),
-          ),
         ),
       ),
     );
@@ -116,7 +125,7 @@ class _SingleProductPageState extends State<SingleProductPage> {
         children: [
           Padding(
             padding: EdgeInsets.only(top: 6),
-            child: Icon(Icons.circle, size: 8, color: Color(0xff999999)),
+            child: Icon(Icons.circle, size: 6, color: Color(0xff999999)),
           ),
           const SizedBox(width: 8),
           Expanded(

@@ -1,11 +1,9 @@
+import 'package:alphatwelve/product/screens/products_page.dart';
 import 'package:alphatwelve/screens/widgets/custom_app_bar.dart';
-import 'package:alphatwelve/screens/widgets/delivery_address_widget.dart';
-import 'package:alphatwelve/screens/widgets/navigator_pane.dart';
-import 'package:alphatwelve/screens/widgets/products_list.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
-import '../models/Product.dart';
+import '../cart/screens/cart.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -15,85 +13,75 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  final products = [
-    Product(
-      id: '1',
-      name: 'Apple iPhone 16',
-      description: '128GB | Teal',
-      imageUrl:
-          'https://res.cloudinary.com/jesmanto/image/upload/v1749131960/product1_m9lhwk.png',
-      price: '\$700.00',
-    ),
-    Product(
-      id: '2',
-      name: 'M4 Macbook Air 13”',
-      description: '256GB | Sky Blue',
-      imageUrl:
-          'https://res.cloudinary.com/jesmanto/image/upload/v1749131960/product2_x9ygc6.png',
-      price: '\$1000.00',
-    ),
-    Product(
-      id: '2',
-      name: 'Google Pixel 9A',
-      description: '128GB|Iris',
-      imageUrl:
-          'https://res.cloudinary.com/jesmanto/image/upload/v1749131960/product4_zotpot.png',
-      price: '\$499.00',
-    ),
-    Product(
-      id: '2',
-      name: 'Apple Airpods 4',
-      description: 'Active Noise Cancellation',
-      imageUrl:
-          'https://res.cloudinary.com/jesmanto/image/upload/v1749131959/product3_m5i6et.png',
-      price: '\$129.00',
-    ),
-    Product(
-      id: '1',
-      name: 'Apple iPhone 16',
-      description: '128GB | Teal',
-      imageUrl:
-          'https://res.cloudinary.com/jesmanto/image/upload/v1749131960/product1_m9lhwk.png',
-      price: '\$700.00',
-    ),
-    Product(
-      id: '1',
-      name: 'Apple iPhone 16',
-      description: '128GB | Teal',
-      imageUrl:
-          'https://res.cloudinary.com/jesmanto/image/upload/v1749131960/product1_m9lhwk.png',
-      price: '\$700.00',
-    ),
-  ];
+  int _selectedIndex = 0;
+
+  final List<Widget> _screens = <Widget>[const ProductsPage(), const Cart()];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(includeSearch: true,),
-      body: SafeArea(
-        child: Column(
-          children: [
-            NavigationPane(title: "Technology"),
-            Expanded(
-              child: ProductsList(
-                products: products,
-                productsCategory: 'Smartphones, Laptops & Accessories',
-              ),
-            ),
-          ],
-        ),
-      ),
+      appBar: _appBar(),
+      body: _screens[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: 0,
-        unselectedItemColor: Colors.blue,
-        selectedItemColor: Colors.black,
+        type: BottomNavigationBarType.fixed,
+        currentIndex: _selectedIndex,
+        selectedItemColor: Colors.blue,
+        unselectedItemColor: Colors.black,
+        showUnselectedLabels: true,
+        onTap: _onItemTapped,
         items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Cart'),
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Favorites'),
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Profile'),
+          BottomNavigationBarItem(
+            icon: _buildNavIcon('assets/icons/home_icon.svg', 0),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: _buildNavIcon('assets/icons/cart_icon.svg', 1),
+            label: 'Cart',
+          ),
+          BottomNavigationBarItem(
+            icon: _buildNavIcon('assets/icons/favourite_icon.svg', 2),
+            label: 'Favorites',
+          ),
+          BottomNavigationBarItem(
+            icon: _buildNavIcon(('assets/icons/profile_icon.svg'), 3),
+            label: 'Profile',
+          ),
         ],
       ),
     );
+  }
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+  Widget _buildNavIcon(String icon, int index) {
+    bool isActive = _selectedIndex == index;
+    return Container(
+      padding:
+          index == 0
+              ? EdgeInsets.symmetric(horizontal: 16, vertical: 4)
+              : EdgeInsets.zero,
+      decoration: BoxDecoration(
+        color: isActive ? Colors.blue : Colors.transparent,
+        shape: BoxShape.rectangle,
+        borderRadius: BorderRadius.all(Radius.circular(16)),
+      ),
+      child: SvgPicture.asset(
+        icon,
+        color: isActive ? Colors.white : Colors.black,
+      ),
+    );
+  }
+
+  PreferredSizeWidget _appBar() {
+    switch (_selectedIndex) {
+      case 0:
+        return CustomAppBar(includeSearch: true);
+      default:
+        return CustomAppBar(includeSearch: false);
+    }
   }
 }
